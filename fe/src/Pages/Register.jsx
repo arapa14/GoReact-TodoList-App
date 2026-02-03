@@ -25,25 +25,30 @@ function Register() {
     }
 
     return (
-        <>
-            <h1>Register</h1>
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-200">
+            <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+                <h1 className="text-3xl font-bold text-center text-green-700 mb-6">Register</h1>
 
-            <RegisterForm
-                name={name}
-                email={email}
-                password={password}
-                loading={loading}
-                error={error}
-                onNameChange={setName}
-                onEmailChange={setEmail}
-                onPasswordChange={setPassword}
-                onSubmit={handleSubmit}
-            />
+                <RegisterForm
+                    name={name}
+                    email={email}
+                    password={password}
+                    loading={loading}
+                    error={error}
+                    onNameChange={setName}
+                    onEmailChange={setEmail}
+                    onPasswordChange={setPassword}
+                    onSubmit={handleSubmit}
+                />
 
-            <p>
-                Already have an account? <a href="/login">Login</a>
-            </p>
-        </>
+                <p className="mt-4 text-center text-gray-600">
+                    Already have an account?{' '}
+                    <a href="/login" className="text-green-500 hover:underline">
+                        Login
+                    </a>
+                </p>
+            </div>
+        </div>
     )
 }
 

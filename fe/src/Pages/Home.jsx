@@ -98,24 +98,37 @@ function Home() {
   if (userLoading) return <p>Loading...</p>
 
   return (
-    <>
-      <h1>Halo, {user.name}</h1>
-      <h2>Email, {user.email}</h2>
-      <button onClick={logout}>Logout</button>
-      <TodoForm
-        task={task}
-        onTaskChange={setTask}
-        error={error}
-        success={success}
-        loading={loading}
-        onSubmit={handleSubmit}
-      />
-      <TodoList
-        todos={todos}
-        onToggleTodo={updateTodo}
-        onDeleteTodo={deleteTodo}
-      />
-    </>
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-purple-200 p-6">
+      <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-6">
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h1 className="text-2xl font-bold text-purple-700">Halo, {user.name}</h1>
+            <h2 className="text-gray-600">{user.email}</h2>
+          </div>
+          <button
+            onClick={logout}
+            className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+          >
+            Logout
+          </button>
+        </div>
+
+        <TodoForm
+          task={task}
+          onTaskChange={setTask}
+          error={error}
+          success={success}
+          loading={loading}
+          onSubmit={handleSubmit}
+        />
+
+        <TodoList
+          todos={todos}
+          onToggleTodo={updateTodo}
+          onDeleteTodo={deleteTodo}
+        />
+      </div>
+    </div>
   )
 }
 

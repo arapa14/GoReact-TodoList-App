@@ -12,34 +12,50 @@ function RegisterForm({
     onSubmit
 }) {
     return (
-        <form
-            onSubmit={onSubmit}
-            style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '300px' }}
-        >
-            <label>Name</label>
-            <input
-                type="text"
-                value={name}
-                onChange={e => onNameChange(e.target.value)}
-            />
+        <form onSubmit={onSubmit} className="flex flex-col gap-4">
+            <div className="flex flex-col">
+                <label className="mb-1 font-medium text-gray-700">Name</label>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={e => onNameChange(e.target.value)}
+                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 bg-green-50"
+                    placeholder="Enter your name"
+                    required
+                />
+            </div>
 
-            <label>Email</label>
-            <input
-                type="email"
-                value={email}
-                onChange={e => onEmailChange(e.target.value)}
-            />
+            <div className="flex flex-col">
+                <label className="mb-1 font-medium text-gray-700">Email</label>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={e => onEmailChange(e.target.value)}
+                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 bg-green-50"
+                    placeholder="Enter your email"
+                    required
+                />
+            </div>
 
-            <label>Password</label>
-            <input
-                type="password"
-                value={password}
-                onChange={e => onPasswordChange(e.target.value)}
-            />
+            <div className="flex flex-col">
+                <label className="mb-1 font-medium text-gray-700">Password</label>
+                <input
+                    type="password"
+                    value={password}
+                    onChange={e => onPasswordChange(e.target.value)}
+                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 bg-green-50"
+                    placeholder="Enter your password"
+                    required
+                />
+            </div>
 
-            {error && <small style={{ color: 'red' }}>{error}</small>}
+            {error && <small className="text-red-500">{error}</small>}
 
-            <button type="submit" disabled={loading}>
+            <button
+                type="submit"
+                disabled={loading}
+                className="mt-2 bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition-colors disabled:opacity-50"
+            >
                 {loading ? 'Loading...' : 'Register'}
             </button>
         </form>

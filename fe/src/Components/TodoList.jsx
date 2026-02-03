@@ -1,13 +1,17 @@
-import React from 'react'
 import TodoItem from './TodoItem'
 
 function TodoList({ todos, onToggleTodo, onDeleteTodo }) {
     return (
-        <>
-            {todos.map((todo, index) => (
-                <TodoItem key={index} todo={todo} onToggleTodo={onToggleTodo} onDeleteTodo={onDeleteTodo}/>
+        <ul className="flex flex-col gap-3">
+            {todos.map((todo) => (
+                <TodoItem
+                    key={todo.id}
+                    todo={todo}
+                    onToggleTodo={onToggleTodo}
+                    onDeleteTodo={onDeleteTodo}
+                />
             ))}
-        </>
+        </ul>
     )
 }
 
