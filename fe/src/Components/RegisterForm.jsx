@@ -1,55 +1,48 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-function RegisterForm() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
-
-        try {
-            const response = await fetch('http://localhost:8080/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, email, password })
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || 'Failed register');
-            }
-
-            window.location.href = '/home';
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    }
-
+function RegisterForm({
+    name,
+    email,
+    password,
+    loading,
+    error,
+    onNameChange,
+    onEmailChange,
+    onPasswordChange,
+    onSubmit
+}) {
     return (
-        <>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '300px' }}>
-                <label>name</label>
-                <input type="name" placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
-                <label>email</label>
-                <input type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <label>password</label>
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <form
+            onSubmit={onSubmit}
+            style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '300px' }}
+        >
+            <label>Name</label>
+            <input
+                type="text"
+                value={name}
+                onChange={e => onNameChange(e.target.value)}
+            />
 
-                {error && <small style={{ color: 'red' }}>{error}</small>}
-                
-                <button type="submit" disabled={loading}>{loading ? 'Loading...' : 'Login'}</button>
-            </form>
-        </>
+            <label>Email</label>
+            <input
+                type="email"
+                value={email}
+                onChange={e => onEmailChange(e.target.value)}
+            />
+
+            <label>Password</label>
+            <input
+                type="password"
+                value={password}
+                onChange={e => onPasswordChange(e.target.value)}
+            />
+
+            {error && <small style={{ color: 'red' }}>{error}</small>}
+
+            <button type="submit" disabled={loading}>
+                {loading ? 'Loading...' : 'Register'}
+            </button>
+        </form>
     )
 }
 
