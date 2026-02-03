@@ -33,6 +33,7 @@ func main() {
 	http.Handle("/login", auth.CORSMiddleware(http.HandlerFunc(userHandler.HandleLogin)))
 	http.Handle("/logout", auth.Protected(userHandler.HandleLogout))
 	http.Handle("/protected", auth.Protected(userHandler.HandleProtected))
+	http.Handle("/me", auth.Protected(userHandler.HandleGetMe))
 
 	http.Handle("/todos", auth.Protected(todoHandler.TodosHandler))
 	http.Handle("/todos/", auth.Protected(todoHandler.TodosByIDHandler))

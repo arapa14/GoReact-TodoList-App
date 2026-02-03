@@ -10,6 +10,7 @@ import (
 type Repository interface {
 	Register(name, email, password string) error
 	FindByEmail(email string) (*User, error)
+	FindByID(userID int) (*User, error)
 }
 
 type repository struct {
@@ -56,5 +57,21 @@ func (r *repository) FindByEmail(email string) (*User, error) {
 	}
 
 	user.Email = email
+	return &user, nil
+}
+
+func (r *repository) FindByID(userID int) (*User, error) {
+	var user User
+
+	err := r.db.QueryRow(
+		`SELECT name, email
+		FROM users_tb
+		WHERE id = $1`,
+		userID,
+	).Scan(&user.Name, &user.Email)
+	if err != nil {
+		return nil, err
+	}
+
 	return &user, nil
 }

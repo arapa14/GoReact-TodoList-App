@@ -10,6 +10,7 @@ import (
 type Service interface {
 	Register(req ReqUserRegister) error
 	Login(req ReqUserLogin) (string, error)
+	GetMe(userID int) (*User, error)
 }
 
 type service struct {
@@ -63,4 +64,8 @@ func (s *service) Login(req ReqUserLogin) (string, error) {
 	}
 
 	return token, nil
+}
+
+func (s *service) GetMe(userID int) (*User, error) {
+	return s.repo.FindByID(userID)
 }
